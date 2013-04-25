@@ -1,0 +1,10 @@
+So well. What I've looked at :
+
+Jedis
+https://github.com/xetorthio/jedis
+  So this is Jedis, a simple way to execute Redis traditional
+  commands in directly in Java. Basicaly you can do SET and GET
+  quite easily. But still no ORM.
+
+  Note: this one is available this way :
+  "redis.clients" % "jedis" % "2.1.0" (see project/Build.scala)
