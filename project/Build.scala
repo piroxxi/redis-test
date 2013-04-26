@@ -12,7 +12,8 @@ object ApplicationBuild extends Build {
     javaCore,
     javaJdbc,
     javaEbean,
-    "redis.clients" % "jedis" % "2.1.0"
+    "redis.clients" % "jedis" % "2.1.0",
+    "com.typesafe" %% "play-plugins-redis" % "2.0.4"
   )
 
   val main = play.Project(appName, appVersion, appDependencies).settings(
