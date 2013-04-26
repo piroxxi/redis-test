@@ -4,19 +4,40 @@ public class Scope {
 	private String scopeId;
 	private String label;
 
-	private String description;
 	private VirtualScope virtualScope;
+	private String description;
 
 	public Scope() {
 		super();
 	}
 
-	public Scope(String scopeId, String label, String description, VirtualScope virtualScope) {
+	public Scope(String scopeId, String label, VirtualScope virtualScope, String description) {
+		super();
+		this.scopeId = scopeId;
+		this.label = label;
+		this.virtualScope = virtualScope;
+		this.description = description;
+	}
+
+	public Scope(String scopeId, String label, VirtualScope virtualScope) {
+		super();
+		this.scopeId = scopeId;
+		this.label = label;
+		this.virtualScope = virtualScope;
+	}
+
+	public Scope(String scopeId, String label, String description) {
 		super();
 		this.scopeId = scopeId;
 		this.label = label;
 		this.description = description;
-		this.virtualScope = virtualScope;
+	}
+
+
+	public Scope(String scopeId, String label) {
+		super();
+		this.scopeId = scopeId;
+		this.label = label;
 	}
 
 	public String getScopeId() {
