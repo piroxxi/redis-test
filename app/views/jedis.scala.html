@@ -1,0 +1,20 @@
+@(connectionInfos: String, logs: List[String])
+<html>
+  <head>
+    <title>test</title>
+  </head>
+  <body>
+    <h1>Jedis test</h1>
+    <p>
+      The connection is : @connectionInfos
+    </p>
+    <p>
+    logs :<br/>
+    <table style="font-family: sans-serif; color: #444">
+	    @for(log <- logs){
+	      <tr><td>@log</td></tr>
+	    }
+    </table>
+    </p>
+  </body>
+</html>
