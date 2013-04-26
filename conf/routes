@@ -1,6 +1,7 @@
 # Home page
 GET     /                           controllers.Application.index()
 GET     /jedis                      controllers.Application.jedis()
+GET     /johm                       controllers.Application.johm()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

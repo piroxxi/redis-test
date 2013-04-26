@@ -1,0 +1,23 @@
+@(users: List[model.OasisUser])
+<html>
+  <head>
+    <title>test</title>
+  </head>
+  <body>
+    <h1>Jedis test</h1>
+    <p>
+      List of the stored users :
+	    <table>
+		    @for(user <- users){
+		      <tr>
+            <td>@user.getOasisUUID()</td>
+            <td>@user.getFirstName()</td>
+            <td>@user.getLastName()</td>
+            <td>@user.getFullName()</td>
+            <td>@user.getEmail()</td>
+	        </tr>
+		    }
+	    </table>
+    </p>
+  </body>
+</html>

@@ -12,7 +12,8 @@ object ApplicationBuild extends Build {
     javaCore,
     javaJdbc,
     javaEbean,
-    "redis.clients" % "jedis" % "2.1.0",
+    //"redis.clients" % "jedis" % "2.1.0",
+    "redis.clients" % "jedis" % "1.5.1",
     "com.typesafe" %% "play-plugins-redis" % "2.0.4"
   )
 
