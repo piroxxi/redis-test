@@ -1,12 +1,29 @@
 package model;
 
+import redis.clients.johm.Attribute;
+import redis.clients.johm.Id;
+import redis.clients.johm.Indexed;
+import redis.clients.johm.Model;
+import redis.clients.johm.SupportAll;
+
+@Model
+@SupportAll
 public class Client {
+	@Id
+	public Long _johm_id;
+
+	@Attribute
+	@Indexed
 	private String clientId;
+	@Attribute
 	private String name;
 
+	@Attribute
 	private String URI;
+	@Attribute
 	private String redirectURI;
 
+	@Attribute
 	private String client_secret;
 
 	public Client() {

@@ -1,12 +1,114 @@
-@()
+@(
+  users: Set[model.OasisUser],
+  resourcesServers: Set[model.ResourceServer],
+  virtualScopes: Set[model.VirtualScope],
+  scopes: Set[model.Scope],
+  clients: Set[model.Client],
+  grants: Set[model.Grant]
+)
+
 <html>
   <head>
     <title>test</title>
   </head>
-  <body>
+  <body style="width: 1000px; margin: auto;">
     <h1>Redis test</h1>
     <div>
       Testing to create a model with redis.
     </div>
+    
+    <!-- 
+      ** That's the users **
+    -->
+    <div style="border: 1px solid black; border-radius: 15px; margin: 20px; padding: 20px;">
+      <h3>Users :</h3>
+      <table style="width: 100%;">
+      @for(user <- users){
+        <tr>
+          <td> @user.getOasisUUID() </td>
+          <td> @user.getFullName() </td>
+          <td> @user.getFirstName() </td>
+          <td> @user.getLastName() </td>
+          <td> @user.getEmail() </td>
+        </tr>
+      }
+      </table>
+    </div>
+    
+    
+    <!-- 
+      ** That's the virtual scopes **
+    -->
+    <div style="border: 1px solid black; border-radius: 15px; margin: 20px; padding: 20px;">
+      <h3>Virtual scopes :</h3>
+      <table style="width: 100%;">
+      @for(virtualScope <- virtualScopes){
+        <tr>
+          <td> @virtualScope.getVirtualScopeId() </td>
+          <td> @virtualScope.getLabel() </td>
+          <td> @virtualScope.getDescription() </td>
+        </tr>
+      }
+      </table>
+    </div>
+    
+    
+    <!-- 
+      ** That's the resources servers **
+    -->
+    <div style="border: 1px solid black; border-radius: 15px; margin: 20px; padding: 20px;">
+      <h3>Resources servers :</h3>
+      <table style="width: 100%;">
+      @for(resourcesServer <- resourcesServers){
+        <tr>
+          <td> @resourcesServer.getServerId() </td>
+          <td> @resourcesServer.getName() </td>
+          <td> @resourcesServer.getURI() </td>
+          <td> @resourcesServer.getClient_secret() </td>
+        </tr>
+      }
+      </table>
+    </div>
+    
+    
+    <!-- 
+      ** That's the scopes **
+    -->
+    <div style="border: 1px solid black; border-radius: 15px; margin: 20px; padding: 20px;">
+      <h3>Scopes :</h3>
+      <table style="width: 100%;">
+      @for(scope <- scopes){
+        <tr>
+          <td> @scope.getScopeId() </td>
+          <td> @scope.getLabel() </td>
+          <td> @scope.getDescription() </td>
+          <td>
+            @if(scope.getVirtualScope() != null){
+              @scope.getVirtualScope().getVirtualScopeId()
+            } 
+          </td>
+        </tr>
+      }
+      </table>
+    </div>
+    
+    <!-- 
+      ** That's the clients **
+    -->
+    <div style="border: 1px solid black; border-radius: 15px; margin: 20px; padding: 20px;">
+      <h3>Clients :</h3>
+      <table style="width: 100%;">
+      @for(client <- clients){
+        <tr>
+          <td> @client.getClientId() </td>
+          <td> @client.getName() </td>
+          <td> @client.getURI() </td>
+          <td> @client.getRedirectURI() </td>
+          <td> @client.getClient_secret() </td>
+        </tr>
+      }
+      </table>
+    </div>
+    
   </body>
 </html>

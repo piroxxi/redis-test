@@ -1,12 +1,29 @@
 package model;
 
+import redis.clients.johm.Attribute;
+import redis.clients.johm.Id;
+import redis.clients.johm.Indexed;
+import redis.clients.johm.Model;
+import redis.clients.johm.SupportAll;
+
+@Model
+@SupportAll
 public class OasisUser {
+	@Id
+	public Long _johm_id;
+
+	@Attribute
+	@Indexed
 	private String oasisUUID;
 
+	@Attribute
 	private String firstName;
+	@Attribute
 	private String lastName;
+	@Attribute
 	private String fullName;
 
+	@Attribute
 	private String email;
 
 	public OasisUser() {

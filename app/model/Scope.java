@@ -1,10 +1,27 @@
 package model;
 
+import redis.clients.johm.Attribute;
+import redis.clients.johm.Id;
+import redis.clients.johm.Indexed;
+import redis.clients.johm.Model;
+import redis.clients.johm.Reference;
+import redis.clients.johm.SupportAll;
+
+@Model
+@SupportAll
 public class Scope {
+	@Id
+	public Long _johm_id;
+
+	@Attribute
+	@Indexed
 	private String scopeId;
+	@Attribute
 	private String label;
 
+	@Reference
 	private VirtualScope virtualScope;
+	@Attribute
 	private String description;
 
 	public Scope() {

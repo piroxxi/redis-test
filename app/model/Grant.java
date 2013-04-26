@@ -1,15 +1,33 @@
 package model;
 
+import redis.clients.johm.Attribute;
+import redis.clients.johm.Id;
+import redis.clients.johm.Indexed;
+import redis.clients.johm.Model;
+import redis.clients.johm.Reference;
+import redis.clients.johm.SupportAll;
+
+@Model
+@SupportAll
 public class Grant {
+	@Id
+	public Long _johm_id;
+
+	@Attribute
+	@Indexed
 	private String grantId;
 
 	/*
 	 * TODO Only one Grant can exist per triplet.
 	 */
+	@Reference
 	private Client client;
+	@Reference
 	private Scope scope;
+	@Reference
 	private OasisUser user;
 
+	@Attribute
 	private GrantState state;
 
 	public Grant() {

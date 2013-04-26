@@ -1,11 +1,27 @@
 package model;
 
+import redis.clients.johm.Attribute;
+import redis.clients.johm.Id;
+import redis.clients.johm.Indexed;
+import redis.clients.johm.Model;
+import redis.clients.johm.SupportAll;
+
+@Model
+@SupportAll
 public class ResourceServer {
+	@Id
+	public Long _johm_id;
+
+	@Attribute
+	@Indexed
 	private String serverId;
+	@Attribute
 	private String name;
 
+	@Attribute
 	private String URI;
 
+	@Attribute
 	private String client_secret;
 
 	public ResourceServer() {
