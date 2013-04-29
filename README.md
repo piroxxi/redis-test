@@ -33,3 +33,7 @@ https://github.com/xetorthio/johm
 # Want to see some code? 
 It starts here :
 https://github.com/piroxxi/redis-test/blob/master/app/controllers/Application.java
+
+# Implementation with JOhm :
+There is a branch for that :
+https://github.com/piroxxi/redis-test/tree/with-JOhm
