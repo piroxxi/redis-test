@@ -2,7 +2,6 @@ package model;
 
 import redis.clients.johm.Attribute;
 import redis.clients.johm.Id;
-import redis.clients.johm.Indexed;
 import redis.clients.johm.Model;
 import redis.clients.johm.SupportAll;
 
@@ -10,10 +9,6 @@ import redis.clients.johm.SupportAll;
 @SupportAll
 public class VirtualScope {
 	@Id
-	public Long _johm_id;
-
-	@Attribute
-	@Indexed
 	private String virtualScopeId;
 	@Attribute
 	private String label;
