@@ -29,14 +29,20 @@ public class Grant {
 		super();
 	}
 
-	public Grant(String grantId, Client client, Scope scope, OasisUser user, GrantState state) {
+	public Grant(Client client, Scope scope, OasisUser user, GrantState state) {
 		super();
-		this.grantId = grantId;
+		this.grantId = Grant.generateId(client, scope, user);
 		this.client = client;
 		this.scope = scope;
 		this.user = user;
 		this.state = state;
 	}
+
+
+	public static String generateId(Client client, Scope scope, OasisUser user) {
+		return client.getClientId() + "&" + scope.getScopeId() + "&" + user.getOasisUUID();
+	}
+
 
 	public String getGrantId() {
 		return grantId;

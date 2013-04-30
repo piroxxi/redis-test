@@ -18,38 +18,46 @@ public class Scope {
 	private VirtualScope virtualScope;
 	@Attribute
 	private String description;
+	@Reference
+	private ResourceServer resourceServer;
 
 	public Scope() {
 		super();
 	}
 
-	public Scope(String scopeId, String label, VirtualScope virtualScope, String description) {
+	public Scope(String scopeId, String label, ResourceServer resourceServer,
+	    VirtualScope virtualScope, String description) {
 		super();
 		this.scopeId = scopeId;
 		this.label = label;
 		this.virtualScope = virtualScope;
 		this.description = description;
+		this.setResourceServer(resourceServer);
 	}
 
-	public Scope(String scopeId, String label, VirtualScope virtualScope) {
+	public Scope(String scopeId, String label, ResourceServer resourceServer,
+	    VirtualScope virtualScope) {
 		super();
 		this.scopeId = scopeId;
 		this.label = label;
 		this.virtualScope = virtualScope;
+		this.setResourceServer(resourceServer);
 	}
 
-	public Scope(String scopeId, String label, String description) {
+	public Scope(String scopeId, String label, ResourceServer resourceServer, String description) {
 		super();
 		this.scopeId = scopeId;
 		this.label = label;
 		this.description = description;
+		this.setResourceServer(resourceServer);
 	}
 
 
-	public Scope(String scopeId, String label) {
+	public Scope(String scopeId, String label, ResourceServer resourceServer) {
 		super();
 		this.scopeId = scopeId;
 		this.label = label;
+		this.setResourceServer(resourceServer);
 	}
 
 	public String getScopeId() {
@@ -83,4 +91,12 @@ public class Scope {
 	public void setVirtualScope(VirtualScope virtualScope) {
 		this.virtualScope = virtualScope;
 	}
+
+	public ResourceServer getResourceServer() {
+	  return resourceServer;
+  }
+
+	public void setResourceServer(ResourceServer resourceServer) {
+	  this.resourceServer = resourceServer;
+  }
 }

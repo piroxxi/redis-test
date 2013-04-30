@@ -1,15 +1,26 @@
 @(
-  users: Set[model.OasisUser],
-  resourcesServers: Set[model.ResourceServer],
-  virtualScopes: Set[model.VirtualScope],
-  scopes: Set[model.Scope],
-  clients: Set[model.Client],
-  grants: Set[model.Grant]
+  users: List[model.OasisUser],
+  resourcesServers: List[model.ResourceServer],
+  virtualScopes: List[model.VirtualScope],
+  scopes: List[model.Scope],
+  clients: List[model.Client],
+  grants: List[model.Grant],
+  tokens: List[model.Token]
 )
 
 <html>
   <head>
     <title>test</title>
+    <style type="text/css">
+			.type_Code {background-color: Chartreuse;}
+      .type_Access {background-color: Khaki;}
+      .type_Refresh {background-color: Thistle;}
+			
+			.grant_Granted {color: green;}
+      .grant_PostPoned {color: purple;}
+      .grant_Denied {color: red;}
+      .grant_Revoked {color: white; background-color: red;}
+		</style>
   </head>
   <body style="width: 1000px; margin: auto;">
     <h1>Redis test</h1>
@@ -35,18 +46,19 @@
       </table>
     </div>
     
-    
     <!-- 
-      ** That's the virtual scopes **
+      ** That's the clients **
     -->
     <div style="border: 1px solid black; border-radius: 15px; margin: 20px; padding: 20px;">
-      <h3>Virtual scopes :</h3>
+      <h3>Clients :</h3>
       <table style="width: 100%;">
-      @for(virtualScope <- virtualScopes){
+      @for(client <- clients){
         <tr>
-          <td> @virtualScope.getVirtualScopeId() </td>
-          <td> @virtualScope.getLabel() </td>
-          <td> @virtualScope.getDescription() </td>
+          <td> @client.getClientId() </td>
+          <td> @client.getName() </td>
+          <td> @client.getURI() </td>
+          <td> @client.getRedirectURI() </td>
+          <td> @client.getClient_secret() </td>
         </tr>
       }
       </table>
@@ -72,6 +84,23 @@
     
     
     <!-- 
+      ** That's the virtual scopes **
+    -->
+    <div style="border: 1px solid black; border-radius: 15px; margin: 20px; padding: 20px;">
+      <h3>Virtual scopes :</h3>
+      <table style="width: 100%;">
+      @for(virtualScope <- virtualScopes){
+        <tr>
+          <td> @virtualScope.getVirtualScopeId() </td>
+          <td> @virtualScope.getLabel() </td>
+          <td> @virtualScope.getDescription() </td>
+        </tr>
+      }
+      </table>
+    </div>
+    
+    
+    <!-- 
       ** That's the scopes **
     -->
     <div style="border: 1px solid black; border-radius: 15px; margin: 20px; padding: 20px;">
@@ -82,10 +111,23 @@
           <td> @scope.getScopeId() </td>
           <td> @scope.getLabel() </td>
           <td> @scope.getDescription() </td>
+          <td> @scope.getResourceServer().getName() </td>
           <td>
             @if(scope.getVirtualScope() != null){
               @scope.getVirtualScope().getVirtualScopeId()
             } 
+          </td>
+          <!-- For real URL construction : see http://tools.ietf.org/html/rfc6749#section-4.1.1 -->
+          <td>
+          @for(client <- clients){
+	          @for(user <- users){
+		          <button
+		             style="width: 100%;"
+		             onclick="window.location = '/authorize?scope=@scope.getScopeId()&client_id=@client.getClientId()&user_id=@user.getOasisUUID()'"
+	            >
+		          Grant for @client.getName() and @user.getFullName()</button><br/>
+		        }
+          }
           </td>
         </tr>
       }
@@ -93,22 +135,36 @@
     </div>
     
     <!-- 
-      ** That's the clients **
+      ** That's the scopes **
     -->
     <div style="border: 1px solid black; border-radius: 15px; margin: 20px; padding: 20px;">
-      <h3>Clients :</h3>
+      <h3>Grants :</h3>
       <table style="width: 100%;">
-      @for(client <- clients){
+      @for(grant <- grants){
         <tr>
-          <td> @client.getClientId() </td>
-          <td> @client.getName() </td>
-          <td> @client.getURI() </td>
-          <td> @client.getRedirectURI() </td>
-          <td> @client.getClient_secret() </td>
+          <td style="font-size: 12px;"> @grant.getGrantId() </td>
+          <td>from @grant.getScope().getResourceServer.getName()</td>
+          <td> @grant.getUser().getFullName() </td>
+          <td class="grant_@grant.getState()"> @grant.getState() </td>
         </tr>
       }
       </table>
     </div>
     
+    
+    <!-- 
+      ** That's the scopes **
+    -->
+    <div style="border: 1px solid black; border-radius: 15px; margin: 20px; padding: 20px;">
+      <h3>Tokens :</h3>
+      <table style="width: 100%;">
+      @for(token <- tokens){
+        <tr class="type_@token.getType()">
+          <td> @token.getTokenId() </td>
+          <td> @token.getType()</td>
+        </tr>
+      }
+      </table>
+    </div>
   </body>
 </html>
